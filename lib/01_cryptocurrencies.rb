@@ -6,11 +6,27 @@ prices = ["6558.07", "468.95", "0.487526", "762.84", "8.86", "85.26", "0.151268"
 currencies_3 = ["Bitcoin", "Ethereum", "XRP"] # Test with only 3 entries
 prices_3 = ["6558.07", "468.95", "0.487526"] # Test with only 3 entries
 
-my_hash = [currencies_3, prices_3].transpose.to_h
-puts my_hash
+#my_hash = [currencies, prices].transpose.to_h
+#puts my_hash
 
-#h = {foo: 0, bar: 1, baz: 2}
-#h.each_pair {|key, value| puts "#{key}: #{value}"} # => {:foo=>0, :bar=>1, :baz=>2}
+h = {}
+for i in (0..currencies.length-1)
+    h[currencies[i]] = prices[i].to_f
+end
 
-#my_array = currencies_3.zip(prices_3)
-#puts my_array.inspect # .inspect allows to return a string containing => [[a, b], [c, d]]
+def high(h) 
+    h.max_by{|k,v| v}
+end
+
+def low(h) 
+    h.min_by{|k,v| v}
+end
+
+def less_than_6000(h)
+    h.select{|k,v| v <= 6000}
+end
+
+puts "La crypto avec la plus grande valeur : \n #{high(h)}"
+#puts "La crypto avec la plus grande valeur : \n #{low(h)}"
+#puts "La crypto avec la plus grande valeur : \n #{less_than_6000(h)}"
+#puts "La devise la plus chère parmi celles inférieures à 6000 : \n #{high(less_than_6000(h))}"
