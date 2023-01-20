@@ -6,13 +6,13 @@ prices = ["6558.07", "468.95", "0.487526", "762.84", "8.86", "85.26", "0.151268"
 currencies_3 = ["Bitcoin", "Ethereum", "XRP"] # Test with only 3 entries
 prices_3 = ["6558.07", "468.95", "0.487526"] # Test with only 3 entries
 
-#my_hash = [currencies, prices].transpose.to_h
-#puts my_hash
+prices_float = prices.map {|prices| prices.to_f}
+h = [currencies, prices_float].transpose.to_h
 
-h = {}
-for i in (0..currencies.length-1)
-    h[currencies[i]] = prices[i].to_f
-end
+#h = {}
+#for i in (0..currencies.length-1)
+#    h[currencies[i]] = prices[i].to_f
+#end
 
 def high(h) 
     h.max_by{|k,v| v}
@@ -27,6 +27,6 @@ def less_than_6000(h)
 end
 
 puts "La crypto avec la plus grande valeur : \n #{high(h)}"
-#puts "La crypto avec la plus grande valeur : \n #{low(h)}"
-#puts "La crypto avec la plus grande valeur : \n #{less_than_6000(h)}"
-#puts "La devise la plus chère parmi celles inférieures à 6000 : \n #{high(less_than_6000(h))}"
+puts "La crypto avec la plus basse valeur : \n #{low(h)}"
+puts "Le nombre de cryptos avec des valeurs inférieures à 6000 : \n #{less_than_6000(h).count}"
+puts "La devise la plus chère parmi celles inférieures à 6000 : \n #{high(less_than_6000(h))}"
